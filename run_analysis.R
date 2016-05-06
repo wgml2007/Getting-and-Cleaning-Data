@@ -2,7 +2,8 @@ rm(list = ls())
 library(reshape2)
 library(dplyr) 
 library(tidyr)
-setwd("C:/Users/yongzhao/Desktop/R 2015/get and clean data/UCI HAR Dataset")
+setwd("C:/Users/Desktop/R 2015/get and clean data/UCI HAR Dataset")
+
 ####### prepare train datasets
 train <- read.table("train/X_train.txt")[featuresWanted]
 trainActivities <- read.table("train/Y_train.txt")
@@ -27,8 +28,6 @@ featuresWanted.names <- features[featuresWanted,2]
 featuresWanted.names<-gsub('-mean', 'Mean', featuresWanted.names)
 featuresWanted.names<-gsub('-std', 'Std', featuresWanted.names)
 featuresWanted.names <- gsub('[-()]', '', featuresWanted.names)
-
-
 
 allData <- rbind(train, test)
 colnames(allData) <- c("subject", "activity", featuresWanted.names)
