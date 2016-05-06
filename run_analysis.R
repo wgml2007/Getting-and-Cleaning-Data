@@ -23,14 +23,11 @@ features <- read.table("features.txt")
 features[,2] <- as.character(features[,2])
 
 # Extract the data on mean and standard deviation
-featuresWanted <- grep(".*mean.*|.*std.*", features[,2])
-featuresWanted.names <- features[featuresWanted,2]
-featuresWanted.names<-gsub('-mean', 'Mean', featuresWanted.names)
-featuresWanted.names<-gsub('-std', 'Std', featuresWanted.names)
-featuresWanted.names <- gsub('[-()]', '', featuresWanted.names)
-wantedfeature <- (grepl("mean", names(dataX)) | grepl("std", names(dataX))) & !grepl("meanFreq", names(dataX))
-index <- which(wantedfeature)
-subX <- dataX[,index]
+featuresneed <- grep(".*mean.*|.*std.*", features[,2])
+featuresneed.names <- features[featuresWanted,2]
+featuresneed.names<-gsub('-mean', 'Mean', featuresneed.names)
+featuresneed.names<-gsub('-std', 'Std', featuresneed.names)
+featuresneed.names <- gsub('[-()]', '', featuresneed.names
 
 
 allData <- rbind(train, test)
