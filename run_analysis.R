@@ -1,7 +1,3 @@
-rm(list = ls())
-setwd("C:/Users/Desktop/R 2015/get and clean data/UCI HAR Dataset")
-
-####### prepare train datasets
 train <- read.table("train/X_train.txt")[featuresWanted]
 trainActivities <- read.table("train/Y_train.txt")
 trainSubjects <- read.table("train/subject_train.txt")
@@ -26,16 +22,17 @@ featuresneed.names <- features[featuresneed,2]
 # remove/replace '-' and '()'to make them more readable and less error-prone
 featuresneed.names<-gsub('-mean', 'Mean', featuresneed.names)
 featuresneed.names<-gsub('-std', 'Std', featuresneed.names)
-featuresneed.names <- gsub('[-()]', '', featuresneed.names
-
-
+featuresneed.names <- gsub('[-()]', '', featuresneed.names)
+                           
+                           
 allData <- rbind(train, test)
-colnames(allData) <- c("subject", "activity", featuresneed.names)
+# create a tidy data set with the average of each variable for each activity and each subject.
+ colnames(allData) <- c("subject", "activity", featuresneed.names)
 allData$activity <- factor(allData$activity, levels = activityLabels[,1], labels = activityLabels[,2])
 allData$subject <- as.factor(allData$subject)
-
+                           
 allData.melted <- melt(allData, id = c("subject", "activity"))
 allData.mean <- dcast(allData.melted, subject + activity ~ variable, mean)
-
+                           
 write.table(allData.mean, "tidy.txt", row.names = FALSE)
 write.csv(tidy.csv, file = "tidy.csv")
