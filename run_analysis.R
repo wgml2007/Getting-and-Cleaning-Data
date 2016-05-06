@@ -1,7 +1,4 @@
 rm(list = ls())
-library(reshape2)
-library(dplyr) 
-library(tidyr)
 setwd("C:/Users/Desktop/R 2015/get and clean data/UCI HAR Dataset")
 
 ####### prepare train datasets
@@ -24,7 +21,9 @@ features[,2] <- as.character(features[,2])
 
 # Extract the data on mean and standard deviation
 featuresneed <- grep(".*mean.*|.*std.*", features[,2])
-featuresneed.names <- features[featuresWanted,2]
+featuresneed.names <- features[featuresneed,2]
+
+# remove/replace '-' and '()'to make them more readable and less error-prone
 featuresneed.names<-gsub('-mean', 'Mean', featuresneed.names)
 featuresneed.names<-gsub('-std', 'Std', featuresneed.names)
 featuresneed.names <- gsub('[-()]', '', featuresneed.names
