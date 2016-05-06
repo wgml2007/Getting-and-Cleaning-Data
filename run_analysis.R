@@ -28,6 +28,10 @@ featuresWanted.names <- features[featuresWanted,2]
 featuresWanted.names<-gsub('-mean', 'Mean', featuresWanted.names)
 featuresWanted.names<-gsub('-std', 'Std', featuresWanted.names)
 featuresWanted.names <- gsub('[-()]', '', featuresWanted.names)
+wantedfeature <- (grepl("mean", names(dataX)) | grepl("std", names(dataX))) & !grepl("meanFreq", names(dataX))
+index <- which(wantedfeature)
+subX <- dataX[,index]
+
 
 allData <- rbind(train, test)
 colnames(allData) <- c("subject", "activity", featuresWanted.names)
